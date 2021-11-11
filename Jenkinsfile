@@ -19,8 +19,17 @@ pipeline{
 		stage ('Check-Git-Secrets') {
 			steps {
 				sh 'rm trufflehog || true'
-				sh 'sudo su -c "docker run gesellix/trufflehog --json https://github.com/Ko-kn3t/webapp.git" -s /bin/sh jenkins > trufflehog'
+				sh 'sudo su -c "docker run dxa4481/trufflehog --json https://github.com/Ko-kn3t/webapp.git" -s /bin/sh jenkins > trufflehog'
 				sh 'cat trufflehog'
+			}
+		}
+
+		stage ('Source Composition Analysis') {
+			steps {
+				sh 'rm owasp* || true'
+				sh 'wget https://raw.githubusercontent.com/Ko-kn3t/webapp/master/owasp-dependency-check.sh'
+				sh 'chmod +x owasp-dependency-check.sh'
+				sh 'bash owasp-dependency-check.sh'
 			}
 		}
 
