@@ -70,7 +70,7 @@ pipeline{
 		stage('DAST - Nuclei') {
 			steps {
 				sshagent(['nuclei']) {
-					sh 'ssh -o StrictHostkeyChecking=no ubuntu@54.169.196.134 "docker run -t projectdiscovery/nuclei nuclei -u http://3.0.55.205:8080/webapp" || true'
+					sh 'ssh -o StrictHostkeyChecking=no ubuntu@54.169.196.134 "nuclei -u http://3.0.55.205:8080/webapp" || true'
 				}
 			}
 		}
