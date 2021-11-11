@@ -19,7 +19,7 @@ pipeline{
 		stage ('Check-Git-Secrets') {
 			steps {
 				sh 'rm trufflehog || true'
-				sh 'sudo su -c "docker run dxa4481/trufflehog --json https://github.com/Ko-kn3t/webapp.git" -s /bin/sh jenkins > trufflehog'
+				sh 'sudo su -c "docker run gesellix/trufflehog --json https://github.com/Ko-kn3t/webapp.git" -s /bin/sh jenkins > trufflehog'
 				sh 'cat trufflehog'
 			}
 		}
