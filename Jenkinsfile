@@ -19,7 +19,7 @@ pipeline{
 		stage ('Check-Git-Secrets') {
 			steps {
 				sh 'rm trufflehog || true'
-				sh 'whoami > me'
+				sh ' sudo su -c "whoami" -s /bin/sh ubuntu > me'
 				sh 'cat me'
 			}
 		}
